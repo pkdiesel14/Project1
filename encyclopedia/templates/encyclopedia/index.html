@@ -1,0 +1,24 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    Encyclopedia
+{% endblock %}
+
+{% block body %}
+    <h1>All Pages</h1>
+
+    <ul>
+        {% for entry in entries %}
+            {% comment %}
+            <li>{{ entry }}</li>
+            <li><a href="{ entry }">{{entry}}</a></li>
+            {% endcomment %}
+            <li><a href="{ entry }">{{entry}}</a></li>
+        {% endfor %}
+        
+    </ul>
+
+   <a href="encyclopedia/entry.html">open css file</a>
+
+    <zero-md src="E:\Documents-data drive\VSCodeProjects\CS50WebProgramming\wiki\entries\CSS.md"></zero-md>
+{% endblock %}
