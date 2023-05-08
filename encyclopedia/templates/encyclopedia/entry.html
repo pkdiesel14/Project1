@@ -1,13 +1,14 @@
 {% extends "encyclopedia/layout.html" %}
 
 {% block title %}
-    Encyclopedia
+    {{ title }}
 {% endblock %}
 
 {% block body %}
     <h1>All Pages</h1>
-
-    <p>Name: {{ CSS }} </p>
     
-    <zero-md src="E:\Documents-data drive\VSCodeProjects\CS50WebProgramming\wiki\entries\CSS.md"></zero-md>
+    <div name="content" rows="5" cols="50" readonly>
+        {{ content|safe }}
+    </div><br>
+
 {% endblock %}

@@ -1,0 +1,29 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    Encyclopedia
+{% endblock %}
+
+{% block body %}
+    <h1>Create New Page</h1>
+
+{% comment %}
+variables passed in: 
+entries - contains all the .md files in the directory
+pages - temp variable to see how to display the .md files
+{% endcomment %}
+
+<form action="{% url 'newpage' %}" method="POST">
+    {% csrf_token %}
+    <label>Title:</label>
+    <input type="text" name="title" placeholder="Enter a Title">
+</br>
+    <label>Markdown Content: </label>
+</br>
+    <textarea name="content"></textarea>
+</br>
+    <input type="submit" value="Save New Page" class="btn btn-primary">
+    
+</form>
+
+{% endblock %}

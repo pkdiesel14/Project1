@@ -7,18 +7,21 @@
 {% block body %}
     <h1>All Pages</h1>
 
+{% comment %}
+variables passed in: 
+entries - contains all the .md files in the directory
+pages - temp variable to see how to display the .md files
+{% endcomment %}
+
     <ul>
         {% for entry in entries %}
-            {% comment %}
-            <li>{{ entry }}</li>
-            <li><a href="{ entry }">{{entry}}</a></li>
-            {% endcomment %}
-            <li><a href="{ entry }">{{entry}}</a></li>
+{% comment %}
+this line worked as a hard coded link the the entry.html file
+            <li><a href="entry">{{entry}}</a></li>
+{% endcomment %}
+            <li><a href={% url 'entry' title=entry %}>{{entry}}</a></li>
         {% endfor %}
         
     </ul>
 
-   <a href="encyclopedia/entry.html">open css file</a>
-
-    <zero-md src="E:\Documents-data drive\VSCodeProjects\CS50WebProgramming\wiki\entries\CSS.md"></zero-md>
 {% endblock %}
