@@ -2,6 +2,7 @@ from django.shortcuts import render
 
 from . import util
 import markdown2
+import random
 
 
 
@@ -60,10 +61,12 @@ def newpage(request):
     else:
         title = request.POST['title']
         content = request.POST['content']
-        titleExits = util.get_entry('title')
+        titleExits = util.get_entry(title)
+        print(f"Title exists is: {titleExits}")
         if titleExits is not None:
+            print("Title already exists")
             return render(request, "encyclopedia/error.html", {
-                "message": "Entry Page already exists"
+            "message": "Title already exists"
             })
         else:
             util.save_entry(title, content)
@@ -72,3 +75,33 @@ def newpage(request):
                 "title":title,
                 "content":html_content
             })
+        
+def randomPage(request):
+    mdlist = util.list_entries()
+    selection = random.choice(mdlist)
+    html_content = convert_md_to_html(selection)
+    return render(request, "encyclopedia/entry.html", {
+        "title": selection,
+        "content":html_content
+    })
+
+def edit_page(request):
+    if request.method == 'POST':
+        title = request.POST['entry_title']
+        content = util.get_entry(title)
+        return render(request, "encyclopedia/edit.html", {
+            "title": title,
+            "content": content
+        })
+    
+def save_edit(request):
+    if request.method == 'POST':
+        title = request.POST['title']
+        content = request.POST['content']
+        #content = util.get_entry(title)
+        #html_content = convert_md_to_html(title)
+        util.save_entry(title, content)
+        return render(request, "encyclopedia/entry.html", {
+            "title": title,
+            "content": content
+        })
